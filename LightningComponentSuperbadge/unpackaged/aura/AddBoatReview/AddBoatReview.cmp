@@ -1,0 +1,49 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" access="global" >
+    <aura:attribute name="boat" type="Boat__c"/>
+    <aura:attribute name="boatReview" type="BoatReview__c"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordError" type="String" access="private"/>
+    <aura:attribute name="boatReviewRecord" type="Object" access="public"/>
+    <aura:registerEvent name="BoatReviewAdded" type="c:BoatReviewAdded"/>
+    
+    <force:recordData aura:id="service"
+                      layoutType="FULL"
+                      targetError="{!v.recordError}"	
+                      targetRecord="{!v.boatReviewRecord}"
+                      
+                      targetFields ="{!v.boatReview}"
+                      fields= "Id, Name, Comment__c, Boat__c"
+                      recordUpdated="{!c.onRecordUpdated}"
+                      mode="EDIT" />
+    
+    
+    
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small">
+            
+            <div class="header-column">
+                <label>Title</label>
+                <div>
+                    <input type="text" name="title" label="Title" value="{!v.boatReview.Name}" class="slds-input" />
+                </div>
+                
+                <label padding="around-small" class= "slds-m-top_xx-small">Description</label>
+                <lightning:inputRichText value="{!v.boatReview.Comment__c}"
+                                         placeholder= "Comment" disabledCategories="FORMAT_FONT"/>
+                <c:FiveStarRating value="{!v.boatReview.Rating__c}"
+                                  readonly="false"/>
+            </div>
+            
+            <div class= "slds-m-top_x-small .slds-align_absolute-center" style="text-align:center">
+                <lightning:button label="Submit" title="submit" iconName= "utility:save" onclick="{! c.onSave }"/>
+            </div>
+        </lightning:layoutItem>
+        
+    </lightning:layout>
+    
+    
+    
+    
+    
+    
+</aura:component>

@@ -1,0 +1,37 @@
+<aura:component  controller="BoatSearchForm" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+      <aura:registerevent name="formsubmit" type="c:FormSubmit"></aura:registerevent>
+     <aura:attribute name="BoatTypes" type="BoatType__c[]" />
+      <aura:attribute name="searchOptions" type="string[]" />
+    <aura:attribute name='searchOptionToIdMap' type='Map' default="{All:''}" />
+    <aura:attribute name='showNewButton' type='Boolean' default='true'/>
+    
+           
+    <lightning:layout horizontalAlign="center">
+    <lightning:layoutItem padding="around-small">
+                 
+    <div class="slds-m-bottom_medium">
+        <lightning:select aura:id='typeSelect'  label="Please select" name='selectItem' onchange=''>
+            <option value= "" text="All Types"></option>
+             <aura:iteration items='{!v.searchOptions}' var='option'>
+                 <option value='{!option}' text='{!option}'></option>
+             </aura:iteration>
+         </lightning:select>
+     </div>
+        </lightning:layoutItem> 
+         
+          <lightning:layoutItem padding="around-small">
+               <div class="slds-m-top_large">
+                     <lightning:button variant="Brand" label="Search" title="search action" onclick="{! c.onFormSubmit }"/>
+                 <aura:if isTrue='{!v.showNewButton}'>
+                     <lightning:button variant="Neutral" label="New" title="new action" onclick="{! c.createBoat }"/>
+                </aura:if>
+              </div>
+            </lightning:layoutItem>
+           
+                       
+         </lightning:layout>
+   
+    
+</aura:component>
