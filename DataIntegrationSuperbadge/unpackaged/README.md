@@ -8,6 +8,10 @@ OData2
 Connected app then 
 generate service token by using consumer secret and key
 
+How to do future call from process builder. 
+In apex class with Invocable method which is called by process builder. 
+Future call with queueable apex class
+
 
 Challenge 9 - 
  - Create external data source connection as specified in challenge, billing system
